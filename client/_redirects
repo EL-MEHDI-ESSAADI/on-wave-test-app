@@ -1,0 +1,3 @@
+/api/text  http://numbersapi.com/1/30/date?json  200
+/api/upload  https://on-wave.onrender.com/upload  200
+/*    /index.html   200

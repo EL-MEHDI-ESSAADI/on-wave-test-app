@@ -11,7 +11,7 @@ $(document).ready(function () {
 
    // ajax call to update the hero heading text
    $.ajax({
-      url: "http://numbersapi.com/1/30/date?json",
+      url: "/api/text",
       success: (result) => {
          $(".hero__main-heading").html(result.text.length > 90 ? result.text.slice(0, 90) + "..." : result.text);
       },
@@ -87,7 +87,7 @@ $(document).ready(function () {
 
       // send images to server
       $.ajax({
-         url: "http://localhost:3030/upload",
+         url: "/api/upload",
          type: "post",
          data: formData,
          contentType: false,
