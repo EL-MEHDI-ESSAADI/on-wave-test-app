@@ -2,6 +2,14 @@ $(document).ready(function () {
    // variables
    let dropedImages = [];
    const allowedImagesTypes = ["image/png", "image/jpeg", "image/webp"];
+   const TEXT_API = "/api/text";
+   const UPLOAD_API = "/api/upload";
+   /*
+   in local host:
+   const TEXT_API = "http://numbersapi.com/1/30/date?json"
+   const UPLOAD_API = "http://localhost:3030"
+
+   */
 
    // menu set up
    $(".page-header__toggle-btn, .page-header__link").click(function () {
@@ -11,7 +19,7 @@ $(document).ready(function () {
 
    // ajax call to update the hero heading text
    $.ajax({
-      url: "/api/text",
+      url: TEXT_API,
       success: (result) => {
          $(".hero__main-heading").html(result.text.length > 90 ? result.text.slice(0, 90) + "..." : result.text);
       },
@@ -87,7 +95,7 @@ $(document).ready(function () {
 
       // send images to server
       $.ajax({
-         url: "/api/upload",
+         url: UPLOAD_API,
          type: "post",
          data: formData,
          contentType: false,

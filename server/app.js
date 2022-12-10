@@ -3,6 +3,7 @@ const cors = require("cors");
 const multer = require("multer");
 const { checkFileType } = require("./utils");
 const PORT = process.env.PORT || 3030;
+const CLIENT_LINk = process.env.CLIENT_LINK || "*";
 const app = express();
 const storageEngine = multer.diskStorage({
    destination: "./images",
@@ -17,10 +18,9 @@ const upload = multer({
    },
 });
 
-
 app.use(
    cors({
-      origin: "*",
+      origin: CLIENT_LINk,
    })
 );
 
