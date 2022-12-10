@@ -1,0 +1,127 @@
+$header-top-padding: 1.5rem;
+
+.page-header {
+   padding-block: $header-top-padding 2.5rem;
+   height: var(--headerHeight);
+
+
+   &__container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+   }
+
+   &__logo,
+   &__nav-logo {
+      width: 135px;
+   }
+
+   &__toggle-btn {
+      position: fixed;
+      right: 20px;
+      z-index: 1031;
+      display: none;
+      height: 21px;
+      width: 26px;
+
+      span {
+         position: absolute;
+         display: block;
+         right: 0;
+         width: 100%;
+         height: 2px;
+         background-color: var(--cl-primary);
+         border-radius: 20px;
+         transition: .5s ease-in-out;
+      }
+
+      span:first-child {
+         top: 0;
+      }
+
+      span:nth-of-type(2) {
+         top: calc(50% - 1px);
+      }
+
+      span:last-of-type {
+         bottom: 0;
+      }
+
+      &--close {
+         span:first-child {
+            top: calc(50% - 1px);
+            transform: rotate(45deg);
+         }
+
+         span:nth-of-type(2) {
+            width: 0;
+            opacity: 0;
+         }
+
+         span:last-of-type {
+            transform: rotate(-45deg);
+            bottom: calc(50% - 1px);
+         }
+      }
+
+   }
+
+   &__menu {
+      display: flex;
+   }
+
+   &__link {
+      padding: .4rem;
+   }
+
+   &__nav-logo {
+      display: none;
+      padding-block: $header-top-padding 2.5rem;
+   }
+
+   @media (max-width: 36em) {
+      &__toggle-btn {
+         display: block;
+      }
+
+      &__nav-logo {
+         display: block;
+      }
+
+      &__menu {
+         position: fixed;
+         top: 0;
+         z-index: 1030;
+         height: 100%;
+         width: 100%;
+         flex-direction: column;
+         align-items: center;
+         font-size: 2rem;
+         background-color: var(--cl-accent-200);
+         overflow: auto;
+         transition: clip-path .7s cubic-bezier(.67, .29, .33, .68), left .7s ease-in-out;
+
+         li:not(:first-child):not(:last-child) {
+            padding-bottom: max(10vh, 3rem);
+         }
+
+         @supports (clip-path: inset(0 0 0% 100%)) {
+            left: 0;
+            clip-path: inset(0 0 0% 100%);
+
+            &--mobile-show {
+               clip-path: inset(0 0 0% 0%);
+            }
+         }
+
+         @supports not (clip-path: inset(0 0 0% 100%)) {
+            left: 100%;
+
+            &--mobile-show {
+               left: 0;
+            }
+         }
+      }
+   }
+}

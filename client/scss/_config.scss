@@ -1,0 +1,775 @@
+/* ------------------- */
+/* Custom properties   */
+/* ------------------- */
+
+:root {
+   /* Colors */
+   --cl-white: white;
+   --cl-primary: #1C1C1C;
+   --cl-secondary: #585757;
+   --cl-accent: #24AFB5;
+   --cl-accent-200: #f7fffe;
+   --cl-accent-300: #cfd3ef;
+   --cl-accent-400: #f8f8ff;
+   --cl-accent-500: #f0f0f0;
+   --cl-accent-600: #11AF22;
+
+   /* font-families */
+   --ff-inter: "Inter", sans-serif;
+   /*--- transition ---*/
+   --trn-fast-smooth-all: all .15s ease-in-out;
+   --trn-fast-smooth-color: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+   /*--- height ---*/
+   --headerHeight: 100px;
+
+}
+
+/* ------------------- */
+/* Basic styling      */
+/* ------------------- */
+
+html {
+   scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+/* set up the body */
+body {
+   min-height: 100vh;
+   color: var(--cl-primary);
+   font-family: var(--ff-inter);
+   line-height: 1.4;
+   transition: var(--trn-fast-smooth-color);
+   background-color: var(--cl-white);
+   overflow-x: hidden;
+}
+
+// :not(img)::selection {
+//    background: var(--clr-accentBg-2);
+//    color: var(--clr-accentText-1);
+// }
+
+img::selection {
+   background-color: transparent;
+}
+
+a {
+   display: inline-block;
+   text-decoration: none;
+   color: currentColor;
+}
+
+ul.not-styled {
+   list-style: none;
+}
+
+img,
+picture {
+   max-width: 100%;
+   display: block;
+   max-height: 100%;
+}
+
+button {
+   border: 0;
+   cursor: pointer;
+   background-color: initial;
+   text-transform: capitalize;
+   font: inherit;
+}
+
+svg {
+   display: inline-block;
+}
+
+/* remove animations for people who've turned them off */
+@media (prefers-reduced-motion: reduce) {
+
+   *,
+   *::before,
+   *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+   }
+}
+
+// focus outline
+:is(a, button, input, textarea, summary),
+.outlined {
+   --outline-size: max(2px, 0.08em);
+   --outline-style: dashed;
+   --outline-color: var(--cl-primary);
+}
+
+:is(a, button, summary):is(:focus, :focus-visible),
+.outlined {
+   outline: var(--outline-size) var(--outline-style) var(--outline-color) !important;
+   outline-offset: var(--outline-offset, var(--outline-size)) !important;
+}
+
+:is(a, button, summary):focus:not(:focus-visible) {
+   outline: none !important;
+}
+
+.skip-to-content {
+   position: absolute;
+   z-index: 9999;
+   background: var(--cl-accent);
+   color: var(--cl-white);
+   padding: 0.5em 1em;
+   transform: translateY(-100%);
+   transition: transform 250ms ease-in;
+
+   &:focus {
+      transform: translateY(0);
+   }
+}
+
+$media-width: (
+   "media-Min-Width": 36em,
+   "containerWidth": 33.75rem),
+   ("media-Min-Width": 48em, "containerWidth": 45rem),
+   ("media-Min-Width": 62em, "containerWidth": 60rem),
+   ("media-Min-Width": 75em, "containerWidth": 71.25rem
+);
+
+.container {
+   margin-inline: auto;
+
+   @media (max-width: 35.99em) {
+      padding-inline: 0.9375rem;
+   }
+
+   @each $meadiaInfo in $media-width {
+      @media (min-width: map-get($meadiaInfo, "media-Min-Width")) {
+         width: map-get($meadiaInfo, "containerWidth"
+            );
+      }
+   }
+}
+
+.page-header__container {
+   margin-inline: auto;
+   @media (max-width: 35.99em) {
+      padding-inline: 0.9375rem;
+   }
+
+   @each $meadiaInfo in $media-width {
+      @media (min-width: map-get($meadiaInfo, "media-Min-Width")) {
+         width: map-get($meadiaInfo, "containerWidth") + .5;
+      }
+   }
+}
+
+
+/* ------------------- */
+/* Utility classes     */
+/* ------------------- */
+
+.d-flex {
+   display: flex;
+   gap: var(--flex-gap, 1rem); // now flex support gap
+}
+
+.grid {
+   display: grid;
+   gap: var(--grid-gap, 1rem);
+}
+
+.d-block {
+   display: block;
+}
+
+.p-relative {
+   position: relative;
+}
+
+.flow>*:where(:not(:first-child)) {
+   margin-top: var(--flow-space, 1rem);
+}
+
+.overflow-hidden {
+   overflow: hidden !important;
+}
+
+.flow>*:where(:not(:first-child)) {
+   margin-top: var(--flow-space, 1rem);
+}
+
+/* colors */
+
+.text-primary {
+   color: var(--cl-primary)
+}
+
+.text-secondary {
+   color: var(--cl-secondary)
+}
+
+.text-accent {
+   color: var(--cl-accent)
+}
+
+/* backgrounds */
+
+.bg-primary {
+   color: var(--cl-primary)
+}
+
+.bg-secondary {
+   color: var(--cl-secondary)
+}
+
+.bg-accent {
+   color: var(--cl-accent)
+}
+
+/* typography */
+
+$spacer: 1rem;
+$spacers: (
+   0: 0,
+   1: $spacer * .25,
+   2: $spacer * .5,
+   3: $spacer,
+   4: $spacer * 1.5,
+   5: $spacer * 3,
+);
+
+.fs-1 {
+   font-size: calc(1.375rem + 1.5vw);
+}
+
+.fs-2 {
+   font-size: calc(1.325rem + .9vw);
+}
+
+.fs-3 {
+   font-size: calc(1.3rem + .6vw);
+}
+
+.fs-4 {
+   font-size: calc(1.275rem + .3vw);
+}
+
+.fs-5 {
+   font-size: 1.25rem;
+}
+
+.fs-6 {
+   font-size: 1rem;
+}
+
+.fs-7 {
+   font-size: 0.875rem;
+}
+
+.display-1 {
+   font-size: calc(1.625rem + 4.5vw);
+}
+
+.display-2 {
+   font-size: calc(1.575rem + 3.9vw);
+}
+
+.display-3 {
+   font-size: calc(1.525rem + 3.3vw);
+}
+
+.display-4 {
+   font-size: calc(1.475rem + 2.7vw);
+}
+
+.display-5 {
+   font-size: calc(1.425rem + 2.1vw);
+}
+
+.display-6 {
+   font-size: calc(1.375rem + 1.5vw);
+}
+
+$utilities: (
+   "padding": ("prefix": "p",
+      "values": $spacers,
+   ),
+   "padding-top": ("prefix": "pt",
+      "values": $spacers,
+   ),
+   "padding-bottom": ("prefix": "pb",
+      "values": $spacers,
+   ),
+   "padding-left": ("prefix": "ps",
+      "values": $spacers,
+   ),
+   "padding-right": ("prefix": "pe",
+      "values": $spacers,
+   ),
+   "margin": ("prefix": "m",
+      "values": $spacers,
+   ),
+   "margin-top": ("prefix": "mt",
+      "values": $spacers,
+   ),
+   "margin-bottom": ("prefix": "mb",
+      "values": $spacers,
+   ),
+   "margin-left": ("prefix": "ms",
+      "values": $spacers,
+   ),
+   "margin-right": ("prefix": "me",
+      "values": $spacers,
+   ),
+);
+
+
+.ff-inter {
+   font-family: var(--ff-inter);
+}
+
+.uppercase {
+   text-transform: uppercase;
+}
+
+.fw-400 {
+   font-weight: 400;
+}
+
+.fw-600 {
+   font-weight: 600;
+}
+
+.fw-700 {
+   font-weight: 700;
+}
+
+// generate utility classes
+@each $property,
+$map in $utilities {
+   $prefix: map-get($map, "prefix");
+   $values: map-get($map, "values");
+
+
+   @each $k,
+   $v in $values {
+      .#{$prefix}-#{$k} {
+         #{$property}: $v;
+      }
+   }
+}
+
+
+/* ------------------- */
+/* animation     */
+/* ------------------- */
+
+
+@keyframes fadeIn {
+   from{
+      opacity: 0;
+      transform: translateY(50px);
+   }to{
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+/* ------------------- */
+/* normalize css      */
+/* ------------------- */
+
+
+html {
+   -ms-text-size-adjust: 100%;
+   /* 2 */
+   -webkit-text-size-adjust: 100%;
+   /* 2 */
+}
+
+/* Grouping content
+ * ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Correct the inheritance of border color in Firefox.
+ * 3. Show the overflow in Edge 18- and IE.
+ */
+
+hr {
+   box-sizing: content-box;
+   /* 1 */
+   color: inherit;
+   /* 2 */
+   height: 0;
+   /* 1 */
+   overflow: visible;
+   /* 3 */
+}
+
+/**
+ * Add the correct display in IE.
+ */
+
+main {
+   display: block;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+   font-family: monospace, monospace;
+   /* 1 */
+   font-size: 1em;
+   /* 2 */
+}
+
+/* Text-level semantics
+ * ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+   background-color: transparent;
+}
+
+/**
+ * Add the correct text decoration in Edge 18-, IE, and Safari.
+ */
+
+abbr[title] {
+   text-decoration: underline;
+   text-decoration: underline dotted;
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+   font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+   font-family: monospace, monospace;
+   /* 1 */
+   font-size: 1em;
+   /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+   font-size: 80%;
+}
+
+/* Embedded content
+ * ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+audio,
+video {
+   display: inline-block;
+}
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+
+audio:not([controls]) {
+   display: none;
+   height: 0;
+}
+
+/**
+ * Remove the border on images within links in IE 10-.
+ */
+
+img {
+   border-style: none;
+}
+
+/**
+ * Hide the overflow in IE.
+ */
+
+svg:not(:root) {
+   overflow: hidden;
+}
+
+/* Tabular data
+ * ========================================================================== */
+
+/**
+ * 1. Correct table border color inheritance in all Chrome, Edge, and Safari.
+ * 2. Remove text indentation from table contents in Chrome, Edge, and Safari.
+ */
+
+table {
+   border-color: currentColor;
+   /* 1 */
+   text-indent: 0;
+   /* 2 */
+}
+
+/* Forms
+ * ========================================================================== */
+
+/**
+ * 1. Show the overflow in IE.
+ * 2. Remove the inheritance of text transform in Edge 18-, Firefox, and IE.
+ */
+
+button {
+   overflow: visible;
+   /* 1 */
+}
+
+/**
+ * Correct the inability to style buttons in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+   -webkit-appearance: button;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+   padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * Show the overflow in Edge 18- and IE.
+ */
+
+input {
+   overflow: visible;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge 18- and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ */
+
+legend {
+   box-sizing: border-box;
+   /* 1 */
+   color: inherit;
+   /* 2 */
+   display: table;
+   /* 1 */
+   max-width: 100%;
+   /* 1 */
+   white-space: normal;
+   /* 1 */
+}
+
+/**
+ * 1. Add the correct display in Edge 18- and IE.
+ * 2. Add the correct vertical alignment in Chrome, Edge, and Firefox.
+ */
+
+progress {
+   display: inline-block;
+   /* 1 */
+   vertical-align: baseline;
+   /* 2 */
+}
+
+/**
+ * Remove the inheritance of text transform in Firefox.
+ */
+
+select {
+   text-transform: none;
+}
+
+/**
+ * 1. Remove the margin in Firefox and Safari.
+ * 2. Remove the default vertical scrollbar in IE.
+ */
+
+textarea {
+   overflow: auto;
+   /* 2 */
+}
+
+
+/**
+ * 1. Correct the odd appearance in Chrome, Edge, and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+   -webkit-appearance: textfield;
+   /* 1 */
+   outline-offset: -2px;
+   /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Safari.
+ */
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+   height: auto;
+}
+
+/**
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
+
+::-webkit-input-placeholder {
+   color: inherit;
+   opacity: 0.54;
+}
+
+/**
+ * Remove the inner padding in Chrome, Edge, and Safari on macOS.
+ */
+
+::-webkit-search-decoration {
+   -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style upload buttons in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+   -webkit-appearance: button;
+   /* 1 */
+   font: inherit;
+   /* 2 */
+}
+
+/**
+ * Remove the inner border and padding of focus outlines in Firefox.
+ */
+
+::-moz-focus-inner {
+   border-style: none;
+}
+
+/**
+ * Restore the focus outline styles unset by the previous rule in Firefox.
+ */
+
+:-moz-focusring {
+   outline: 1px dotted ButtonText;
+}
+
+/**
+ * Remove the additional :invalid styles in Firefox.
+ */
+
+:-moz-ui-invalid {
+   box-shadow: none;
+}
+
+/* Interactive
+ * ========================================================================== */
+
+/*
+ * Add the correct display in Edge 18- and IE.
+ */
+
+details {
+   display: block;
+}
+
+/*
+ * Add the correct styles in Edge 18-, IE, and Safari.
+ */
+
+dialog {
+   background-color: white;
+   border: solid;
+   color: black;
+   display: block;
+   height: -moz-fit-content;
+   height: -webkit-fit-content;
+   height: fit-content;
+   left: 0;
+   margin: auto;
+   padding: 1em;
+   position: absolute;
+   right: 0;
+   width: -moz-fit-content;
+   width: -webkit-fit-content;
+   width: fit-content;
+}
+
+dialog:not([open]) {
+   display: none;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+   display: list-item;
+}
+
+/* Scripting
+ * ========================================================================== */
+
+/**
+ * Add the correct display in IE 9-.
+ */
+
+canvas {
+   display: inline-block;
+}
+
+/**
+ * Add the correct display in IE.
+ */
+
+template {
+   display: none;
+}
+
+/* User interaction
+ * ========================================================================== */
+
+/**
+ * Add the correct display in IE 10-.
+ */
+
+[hidden] {
+   display: none;
+}

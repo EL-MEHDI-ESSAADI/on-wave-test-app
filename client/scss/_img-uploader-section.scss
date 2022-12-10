@@ -1,0 +1,63 @@
+.img-uploader-section {
+   margin-block: 3rem;
+   opacity: 0;
+
+   &--show {
+      animation: fadeIn 1s ease-out forwards;
+
+   }
+
+   &__main-heading {
+      text-align: center;
+   }
+
+   &__drop-area {
+      display: grid;
+      justify-items: center;
+      width: min(100%, 600px);
+      height: 200px;
+      padding: 1.5rem;
+      margin: auto;
+      border: 3px dotted var(--cl-accent-300);
+      border-radius: .7rem;
+      text-align: center;
+      background-color: var(--cl-accent-400);
+
+      &[disabled] {
+         cursor: no-drop;
+      }
+
+      &--active {
+         background-color: var(--cl-accent-500);
+      }
+
+      * {
+         pointer-events: none;
+      }
+   }
+
+   &__file {
+      width: min(100%, 600px);
+      padding: 10px;
+      margin-inline: auto;
+      margin-top: 1rem;
+      border: 1.5px solid var(--cl-accent-600);
+      border-radius: .25rem;
+   }
+
+   &__upload-btn {
+      display: block;
+      color: var(--cl-white);
+      background-color: var(--cl-accent);
+      padding: .5rem 3rem;
+      margin-inline: auto;
+      margin-top: 1rem;
+      border-radius: .25rem;
+
+      &:disabled {
+         opacity: .5;
+         cursor: not-allowed;
+      }
+   }
+
+}

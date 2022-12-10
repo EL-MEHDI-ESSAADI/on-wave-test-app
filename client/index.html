@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Click It</title>
+   <link rel="stylesheet" href="./css/main.css" />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+   <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+</head>
+
+<body>
+
+   <!-- start skip to content link -->
+   <a href="#main" class="skip-to-content">Skip to content</a>
+   <!-- end skip to content link -->
+
+   <!-- start haeder -->
+   <header class="page-header">
+      <div class="page-header__container">
+         <a class="page-header__logo" href="/"><img src="assets/logo.png" alt="logo" /></a>
+         <button aria-label="toggle menu" class="page-header__toggle-btn"><span></span><span></span><span></span>
+         </button>
+
+         <nav>
+            <ul class="d-flex fw-600 page-header__menu not-styled">
+               <li class="page-header__nav-logo">
+                  <img src="assets/logo.png" alt="logo" />
+               </li>
+               <li>
+                  <a class="page-header__link" href="#about">About us</a>
+               </li>
+               <li>
+                  <a class="page-header__link" href="#img-uploader">Image uploader</a>
+               </li>
+               <li>
+                  <a class="page-header__link" href="#Contact">Contact us</a>
+               </li>
+            </ul>
+         </nav>
+      </div>
+   </header>
+   <!-- end haeder -->
+
+   <!-- start  hero-->
+   <main class="hero" id="main">
+      <div class="container d-flex">
+         <img class="hero__img" src="assets/fitness.jpg" alt="fitness">
+         <h1 class="hero__main-heading fs-4">Loading Text...</h1>
+      </div>
+   </main>
+   <!-- end  hero-->
+
+   <!-- start image uploader section -->
+   <section class="img-uploader-section " id="img-uploader">
+      <div class="container">
+         <h2 class="fs-2 img-uploader-section__main-heading mb-4">Image Uploader</h2>
+         <div class="img-uploader-section__drop-area">
+            <img src="assets/drag-drop.png" alt="drag-drop">
+            <h5 class="img-uploader-section__drop-area-text fs-5">Drop & drop images here</h5>
+            <p class="img-uploader-section__formates-text">Supported formates: JPEG, PNG, WEBP</p>
+         </div>
+         <div class="img-uploader-section__files">
+         </div>
+         <button class="img-uploader-section__upload-btn">UPLOAD FILES</button>
+      </div>
+   </section>
+   <!-- end image uploader section -->
+
+   <!-- start alerts -->
+   <div class="alerts flow">
+   </div>
+   <!-- end alerts -->
+
+   <!-- scripts -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+   <script src="main.js"></script>
+</body>
+
+</html>

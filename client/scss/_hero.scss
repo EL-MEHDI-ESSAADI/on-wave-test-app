@@ -1,0 +1,29 @@
+.hero {
+   display: grid;
+   align-content: center;
+   animation: fadeIn 1s ease-out  forwards;
+   min-height: calc(100vh - 100px);
+   
+   .container {
+      align-items: center;
+      justify-content: center;
+   }
+
+   &__img {
+      width: 400px;
+   }
+
+   &__main-heading {
+      width: min(30ch, 100%);
+      font-style: italic;
+   }
+
+   @media (max-width: 49em) {
+      .container {
+         flex-direction: column;
+      }
+      &__main-heading{
+         text-align: center;
+      }
+   }
+}

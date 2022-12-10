@@ -1,0 +1,26 @@
+.alerts {
+   position: fixed;
+   top: 2rem;
+   right: 1rem;
+
+
+   .alert {
+      width: 300px;
+      padding: .5rem 1rem;
+      border-radius: .25rem;
+      border-width: 1px;
+
+      &--success {
+         color: #12703a;
+         background-color: #d1ecdd;
+         border-color: #1aa053;
+      }
+
+      &--danger {
+         color: #a94a13;
+         background-color: #fce1d1;
+         border-color: #f16a1b;
+      }
+   }
+
+}
